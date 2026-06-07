@@ -37,18 +37,18 @@ export default function Home() {
       const totalScroll = document.documentElement.scrollTop;
       const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scroll = `${totalScroll / windowHeight}`;
-      
+
       setScrollProgress(Number(scroll));
       setShowScrollTop(totalScroll > 500);
     };
-    
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const filteredPrompts = prompts.filter((p) => {
-    const matchesSearch = p.title.toLowerCase().includes(search.toLowerCase()) || 
-                          p.prompt.toLowerCase().includes(search.toLowerCase());
+    const matchesSearch = p.title.toLowerCase().includes(search.toLowerCase()) ||
+      p.prompt.toLowerCase().includes(search.toLowerCase());
     const matchesCategory = category === "All" || p.category === category;
     return matchesSearch && matchesCategory;
   });
@@ -59,7 +59,7 @@ export default function Home() {
     <div className="min-h-screen bg-black text-white selection:bg-white/20">
       <AnimatePresence>
         {loading && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
@@ -72,10 +72,10 @@ export default function Home() {
                 transition={{ duration: 0.5 }}
                 className="text-4xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 mb-4"
               >
-                PromptsWorld
+                Prompt Station
               </motion.div>
               <div className="w-48 h-[1px] bg-white/10 overflow-hidden relative">
-                <motion.div 
+                <motion.div
                   initial={{ x: "-100%" }}
                   animate={{ x: "100%" }}
                   transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
@@ -88,7 +88,7 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Scroll Progress */}
-      <motion.div 
+      <motion.div
         className="fixed top-0 left-0 h-[2px] bg-white z-50 origin-left"
         style={{ scaleX: scrollProgress }}
       />
@@ -96,35 +96,36 @@ export default function Home() {
       {/* Navbar */}
       <nav className="fixed top-0 w-full z-40 border-b border-white/5 bg-black/50 backdrop-blur-xl">
         <div className="w-full 2xl:max-w-[2000px] mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
-          <div onClick={() => { setCategory("All"); window.scrollTo({top:0, behavior:'smooth'}); }} className="cursor-pointer text-xl font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60">
-            PromptsWorld
+          <div onClick={() => { setCategory("All"); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="cursor-pointer flex items-center gap-2 text-xl font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60">
+            <img src="/prompts-station.png" alt="Prompt Station Logo" className="w-8 h-8 object-contain" />
+            Prompt Station
           </div>
           <div className="hidden md:flex items-center space-x-8 text-sm text-white/60">
-            <button onClick={() => { setCategory("All"); window.scrollTo({top:0, behavior:'smooth'}); }} className="hover:text-white transition-colors relative group text-white">
+            <button onClick={() => { setCategory("All"); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-white transition-colors relative group text-white">
               Home
               <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-white transition-all"></span>
             </button>
             <button onClick={() => document.getElementById("gallery-section")?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-white transition-colors relative group">
               Trending
             </button>
-            
+
             <div className="relative group py-2">
               <button className="hover:text-white transition-colors flex items-center gap-1">
                 Categories <ChevronDown className="w-3 h-3" />
               </button>
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-40 bg-[#111] border border-white/10 rounded-xl p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all shadow-2xl">
-                 {categories.map(cat => (
-                   <button 
-                     key={cat} 
-                     onClick={() => {
-                       setCategory(cat);
-                       document.getElementById("gallery-section")?.scrollIntoView({ behavior: 'smooth' });
-                     }} 
-                     className="block w-full text-left px-4 py-2 text-sm text-white/60 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
-                   >
-                     {cat}
-                   </button>
-                 ))}
+                {categories.map(cat => (
+                  <button
+                    key={cat}
+                    onClick={() => {
+                      setCategory(cat);
+                      document.getElementById("gallery-section")?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="block w-full text-left px-4 py-2 text-sm text-white/60 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                  >
+                    {cat}
+                  </button>
+                ))}
               </div>
             </div>
 
@@ -139,17 +140,17 @@ export default function Home() {
       <section className="relative min-h-[90vh] flex items-center justify-center px-6 overflow-hidden pt-20">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-white/[0.02] rounded-full blur-[120px] pointer-events-none"></div>
-        
+
         <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 2.2 }}
             className="text-6xl md:text-8xl font-bold tracking-tighter mb-6 text-transparent bg-clip-text bg-gradient-to-b from-white via-white/80 to-black drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
           >
-            PromptsWorld
+            Prompt Station
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 2.4 }}
@@ -157,19 +158,19 @@ export default function Home() {
           >
             Discover powerful AI image prompts, explore creative transformations, and elevate your visual creations with carefully curated prompt collections.
           </motion.p>
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 2.6 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <button 
+            <button
               onClick={() => document.getElementById("gallery-section")?.scrollIntoView({ behavior: 'smooth' })}
               className="px-8 py-3 rounded-full bg-white text-black font-medium hover:scale-105 transition-transform hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]"
             >
               Explore Prompts
             </button>
-            <button 
+            <button
               onClick={() => document.getElementById("gallery-section")?.scrollIntoView({ behavior: 'smooth' })}
               className="px-8 py-3 rounded-full bg-white/5 text-white font-medium border border-white/10 hover:bg-white/10 transition-colors"
             >
@@ -184,9 +185,9 @@ export default function Home() {
         <div className="w-full 2xl:max-w-[2000px] mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center gap-4">
           <div className="relative w-full md:w-96">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
-            <input 
-              type="text" 
-              placeholder="Search prompts..." 
+            <input
+              type="text"
+              placeholder="Search prompts..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full bg-white/5 border border-white/10 rounded-full pl-10 pr-4 py-2 text-sm text-white focus:outline-none focus:border-white/30 transition-colors"
@@ -197,9 +198,8 @@ export default function Home() {
               <button
                 key={cat}
                 onClick={() => setCategory(cat)}
-                className={`whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-medium transition-colors ${
-                  category === cat ? "bg-white text-black" : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white"
-                }`}
+                className={`whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-medium transition-colors ${category === cat ? "bg-white text-black" : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white"
+                  }`}
               >
                 {cat}
               </button>
@@ -222,8 +222,8 @@ export default function Home() {
               onClick={() => setSelectedPrompt(prompt)}
             >
               <div className="overflow-hidden bg-white/5 rounded-2xl">
-                <img 
-                  src={prompt.image} 
+                <img
+                  src={prompt.image}
                   alt={prompt.title}
                   loading="lazy"
                   className="w-full h-auto block transition-transform duration-700 group-hover:scale-105"
@@ -234,7 +234,7 @@ export default function Home() {
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
+
               <div className="absolute bottom-0 left-0 w-full p-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 flex flex-col gap-2">
                 <h3 className="text-white font-medium truncate">{prompt.title}</h3>
                 <div className="flex items-center justify-between">
@@ -249,7 +249,7 @@ export default function Home() {
               </div>
 
               {/* Quick Copy overlay */}
-              <button 
+              <button
                 className="absolute top-4 right-4 bg-white/10 backdrop-blur-md border border-white/20 p-2 rounded-full opacity-0 group-hover:opacity-100 hover:bg-white hover:text-black transition-all"
                 onClick={(e) => {
                   e.stopPropagation();
@@ -270,7 +270,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t border-white/5 py-12 text-center text-white/40">
-        <p className="text-sm">© {new Date().getFullYear()} PromptsWorld. Crafted with intention.</p>
+        <p className="text-sm">© {new Date().getFullYear()} Prompt Station. Crafted with intention.</p>
       </footer>
 
       {/* Back to top */}
@@ -307,7 +307,7 @@ export default function Home() {
               onClick={(e) => e.stopPropagation()}
               className="w-full max-w-6xl max-h-full bg-[#0a0a0a] border border-white/10 rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-[0_0_50px_rgba(255,255,255,0.05)] relative"
             >
-              <button 
+              <button
                 onClick={() => setSelectedPrompt(null)}
                 className="absolute top-4 right-4 z-10 p-2 bg-black/50 text-white/60 hover:text-white rounded-full backdrop-blur-md border border-white/10"
               >
@@ -315,13 +315,13 @@ export default function Home() {
               </button>
 
               <div className="w-full md:w-1/2 h-[40vh] md:h-[80vh] bg-black/50 relative overflow-hidden flex items-center justify-center p-4">
-                <img 
-                  src={selectedPrompt.image} 
+                <img
+                  src={selectedPrompt.image}
                   alt={selectedPrompt.title}
                   className="w-full h-full object-contain"
                 />
               </div>
-              
+
               <div className="w-full md:w-1/2 p-6 md:p-10 flex flex-col h-full overflow-y-auto">
                 <div className="flex items-center gap-2 mb-4">
                   <span className="text-xs px-2 py-1 border border-white/10 text-white/70 rounded bg-white/5 uppercase tracking-wider font-medium">
@@ -335,7 +335,7 @@ export default function Home() {
                 </div>
 
                 <h2 className="text-3xl font-bold tracking-tight mb-2 text-white/90">{selectedPrompt.title}</h2>
-                
+
                 <div className="flex gap-6 mb-8 text-white/40 text-sm">
                   <span className="flex items-center gap-1.5"><Heart className="w-4 h-4" /> {selectedPrompt.likes} likes</span>
                   <span className="flex items-center gap-1.5"><Star className="w-4 h-4" /> {selectedPrompt.views} views</span>
@@ -346,7 +346,7 @@ export default function Home() {
                   <div className="text-white/80 font-mono text-sm leading-relaxed whitespace-pre-wrap">
                     {selectedPrompt.prompt}
                   </div>
-                  <button 
+                  <button
                     onClick={() => {
                       navigator.clipboard.writeText(selectedPrompt.prompt);
                       const btn = document.getElementById('copy-btn-text');

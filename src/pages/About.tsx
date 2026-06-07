@@ -17,7 +17,7 @@ export default function About() {
             onClick={() => setLocation("/")}
             className="text-xl font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60 cursor-pointer"
           >
-            PromptsWorld
+            Prompt Station
           </div>
           <div className="hidden md:flex items-center space-x-8 text-sm text-white/60">
             <button onClick={() => setLocation("/")} className="hover:text-white transition-colors">Home</button>
@@ -54,7 +54,7 @@ export default function About() {
           animate={{ opacity: 1, y: 0 }}
           className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60"
         >
-          About PromptsWorld
+          About Prompt Station
         </motion.h1>
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -63,7 +63,7 @@ export default function About() {
           className="prose prose-invert prose-lg"
         >
           <p className="text-white/60 leading-relaxed text-lg mb-6">
-            Welcome to PromptsWorld, your ultimate destination for high-quality, curated AI generation prompts. Our mission is to bridge the gap between imagination and digital creation by providing you with the most effective, creative, and powerful text prompts.
+            Welcome to Prompt Station, your ultimate destination for high-quality, curated AI generation prompts. Our mission is to bridge the gap between imagination and digital creation by providing you with the most effective, creative, and powerful text prompts.
           </p>
           <p className="text-white/60 leading-relaxed text-lg mb-6">
             Whether you are exploring cinematic landscapes, realistic portraits, fashion concepts, or beyond, we have meticulously crafted prompts that yield breathtaking results. Start exploring our collections today and bring your ideas to life.
